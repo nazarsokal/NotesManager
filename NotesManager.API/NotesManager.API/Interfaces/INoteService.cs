@@ -7,7 +7,7 @@ public interface INoteService
 {
     public Task<List<NoteListDto>> GetAllNotes();
     
-    public Task<NoteReadDto> GetNoteById(int id);
+    public Task<NoteReadDto> GetNoteById(Guid id);
     
     public Task CreateNote(NoteCreateDto note);
     

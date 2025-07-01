@@ -18,14 +18,16 @@ public class NotesController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> Notes()
     {
-        List<NoteListDto> noteList = await _noteService.GetAllNotes();
+        List<NoteListDto> noteListDtos = await _noteService.GetAllNotes();
         
-        return Ok(noteList);
+        return Ok(noteListDtos);
     }
 
     [HttpGet("{id}")]
-    public IActionResult Notes(Guid id)
+    public async Task<IActionResult> Notes(Guid id)
     {
-        return Ok($"Your id: {id}");
+        var noteReadDto = await _noteService.GetNoteById(id);
+        
+        return Ok(noteReadDto);
     }
 }

@@ -24,9 +24,11 @@ public class NoteService : INoteService
         return _mapper.Map<List<NoteListDto>>(notes);
     }
 
-    public Task<NoteReadDto> GetNoteById(int id)
+    public async Task<NoteReadDto> GetNoteById(Guid id)
     {
-        throw new NotImplementedException();
+        var note = await _dbContext.Notes.FindAsync(id);
+        
+        return _mapper.Map<NoteReadDto>(note);
     }
 
     public Task CreateNote(NoteCreateDto note)
