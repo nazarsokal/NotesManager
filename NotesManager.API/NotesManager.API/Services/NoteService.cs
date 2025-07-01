@@ -17,9 +17,11 @@ public class NoteService : INoteService
         _mapper = mapper;
     }
     
-    public Task<List<NoteListDto>> GetAllNotes()
+    public async Task<List<NoteListDto>> GetAllNotes()
     {
-        throw new NotImplementedException();
+        var notes = await _dbContext.Notes.ToListAsync();
+        
+        return _mapper.Map<List<NoteListDto>>(notes);
     }
 
     public Task<NoteReadDto> GetNoteById(int id)
