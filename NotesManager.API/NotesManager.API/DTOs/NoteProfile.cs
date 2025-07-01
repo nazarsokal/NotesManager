@@ -17,6 +17,5 @@ public class NoteProfile : Profile
         CreateMap<Note, NoteListDto>();
         CreateMap<Note, NoteReadDto>();
         CreateMap<Note, NoteUpdateDto>();
-        CreateMap<List<Note>, List<NoteListDto>>();
     }
 }

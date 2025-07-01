@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
+using NotesManager.API.DTOs;
+using NotesManager.API.Interfaces;
 
 namespace NotesManager.API.Controllers;
 
@@ -6,10 +8,19 @@ namespace NotesManager.API.Controllers;
 [Route("api/[controller]")]
 public class NotesController : ControllerBase
 {
-    [HttpGet]
-    public IActionResult Notes()
+    private readonly INoteService _noteService;
+
+    public NotesController(INoteService noteService)
     {
-        return Ok("Hello World!");
+        _noteService = noteService;
+    }
+    
+    [HttpGet]
+    public async Task<IActionResult> Notes()
+    {
+        List<NoteListDto> noteList = await _noteService.GetAllNotes();
+        
+        return Ok(noteList);
     }
 
     [HttpGet("{id}")]

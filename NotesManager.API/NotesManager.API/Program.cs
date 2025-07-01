@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using NotesManager.API.DTOs;
 using NotesManager.API.Infrastructure;
+using NotesManager.API.Interfaces;
+using NotesManager.API.Services;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +14,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 });
 
 builder.Services.AddAutoMapper(typeof(NoteProfile));
+builder.Services.AddScoped<INoteService, NoteService>();
 
 var app = builder.Build();
 
