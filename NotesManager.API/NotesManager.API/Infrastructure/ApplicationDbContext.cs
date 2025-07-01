@@ -19,6 +19,6 @@ public class ApplicationDbContext : DbContext
     {
         base.OnModelCreating(modelBuilder);
         
-        modelBuilder.Entity<Note>().HasData(new Note() {NoteId = Guid.NewGuid(), Title = "Welcome Note", Content = "Hello World!", Created = DateTime.Now});
+        modelBuilder.Entity<Note>().HasData(new Note() {NoteId = Guid.NewGuid(), Title = "Welcome Note", Content = "Hello World!", DateCreated = DateTime.Now});
     }
 }
