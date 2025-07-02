@@ -13,6 +13,17 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("Default"));
 });
 
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(policy =>
+    {
+        policy.AllowAnyOrigin() 
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+});
+
+
 builder.Services.AddAutoMapper(typeof(NoteProfile));
 builder.Services.AddScoped<INoteService, NoteService>();
 
@@ -21,5 +32,6 @@ var app = builder.Build();
 app.UseHttpsRedirection();
 app.MapControllers();
 app.UseHsts();
+app.UseCors();
 
 app.Run();
