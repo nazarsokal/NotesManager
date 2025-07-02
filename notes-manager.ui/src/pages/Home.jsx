@@ -1,14 +1,22 @@
 import React, { useContext, useState } from 'react';
 import { NotesContext } from '../context/NotesContext';
 import NoteCard from '../components/NoteCard';
+import CreateNoteModal from '../components/CreateNoteModal';
 
 const Home = () => {
-  const { notes, fetchNotes, handleView, handleUpdate, handleDelete } = useContext(NotesContext);
+  const { notes, fetchNotes, handleView, handleUpdate, handleDelete, createNote, isModalOpen, setIsModalOpen } = useContext(NotesContext);
   const [isNotesVisible, setIsNotesVisible] = useState(false);
 
   const handleSeeAllNotes = async () => {
     await fetchNotes();
     setIsNotesVisible(true);
+  };
+
+  const handleCreateNote = async (newNote) => {
+    await createNote(newNote);
+    if (isNotesVisible) {
+      await fetchNotes(); // Refresh notes if visible
+    }
   };
 
   return (
@@ -41,6 +49,11 @@ const Home = () => {
             )}
           </>
         )}
+        <CreateNoteModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          onCreate={handleCreateNote}
+        />
       </div>
     </div>
   );

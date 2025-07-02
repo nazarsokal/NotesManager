@@ -1,10 +1,11 @@
 import React, { createContext, useState } from 'react';
-import { fetchNotes as fetchNotesAPI, updateNote, deleteNote } from '../utils/api';
+import { fetchNotes as fetchNotesAPI, updateNote, deleteNote, createNote as createNoteAPI } from '../utils/api';
 
 export const NotesContext = createContext();
 
 export const NotesProvider = ({ children }) => {
   const [notes, setNotes] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const fetchNotes = async () => {
     try {
@@ -12,6 +13,15 @@ export const NotesProvider = ({ children }) => {
       setNotes(fetchedNotes);
     } catch (error) {
       console.error('Error fetching notes:', error);
+    }
+  };
+
+  const createNote = async (newNote) => {
+    try {
+      const createdNote = await createNoteAPI(newNote);
+      setNotes([...notes, createdNote]);
+    } catch (error) {
+      console.error('Error creating note:', error);
     }
   };
 
@@ -34,7 +44,18 @@ export const NotesProvider = ({ children }) => {
   };
 
   return (
-    <NotesContext.Provider value={{ notes, fetchNotes, handleView, handleUpdate, handleDelete }}>
+    <NotesContext.Provider
+      value={{
+        notes,
+        fetchNotes,
+        createNote,
+        handleView,
+        handleUpdate,
+        handleDelete,
+        isModalOpen,
+        setIsModalOpen,
+      }}
+    >
       {children}
     </NotesContext.Provider>
   );

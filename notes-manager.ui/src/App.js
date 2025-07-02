@@ -1,24 +1,30 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { NotesProvider } from './context/NotesContext';
+import { NotesContext, NotesProvider } from './context/NotesContext';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import NoteDetail from './pages/NoteDetail';
 // import NotFound from './pages/NotFound';
 
 const App = () => {
+  const { setIsModalOpen } = useContext(NotesContext);
+
   return (
-    <NotesProvider>
-      <Router>
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/note/:id" element={<NoteDetail />} />
-          {/* <Route path="*" element={<NotFound />} /> */}
-        </Routes>
-      </Router>
-    </NotesProvider>
+    <Router>
+      <Navbar onCreateNote={() => setIsModalOpen(true)} />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/note/:id" element={<NoteDetail />} />
+        {/* <Route path="*" element={<NotFound />} /> */}
+      </Routes>
+    </Router>
   );
 };
 
-export default App;
+const Root = () => (
+  <NotesProvider>
+    <App />
+  </NotesProvider>
+);
+
+export default Root;

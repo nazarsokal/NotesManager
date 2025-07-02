@@ -6,6 +6,16 @@ export const fetchNotes = async () => {
   ];
 };
 
+export const createNote = async (newNote) => {
+  // Simulate API call to create a note
+  const createdNote = {
+    id: Math.floor(Math.random() * 10000) + 3, // Generate unique ID for mock
+    ...newNote,
+  };
+  console.log(`Creating note:`, createdNote);
+  return createdNote;
+};
+
 export const updateNote = async (id, updatedNote) => {
   console.log(`Updating note ${id} with`, updatedNote);
   // Implement actual API call
