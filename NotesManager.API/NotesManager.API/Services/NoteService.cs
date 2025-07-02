@@ -42,9 +42,20 @@ public class NoteService : INoteService
         return _mapper.Map<NoteReadDto>(noteEntity);
     }
 
-    public Task UpdateNote(NoteUpdateDto note)
+    public async Task<NoteReadDto> UpdateNote(NoteUpdateDto note, Guid id)
     {
-        throw new NotImplementedException();
+        Note? noteEntityToUpdate = await _dbContext.Notes.FindAsync(id);
+        
+        if (noteEntityToUpdate == null)
+            throw new NullReferenceException($"Note with id: {id} not found");
+        
+        noteEntityToUpdate.Title = note.Title;
+        noteEntityToUpdate.Content = note.Content;
+        
+        _dbContext.Notes.Update(noteEntityToUpdate);
+        await _dbContext.SaveChangesAsync();
+        
+        return _mapper.Map<NoteReadDto>(noteEntityToUpdate);
     }
 
     public Task DeleteNote(Guid id)

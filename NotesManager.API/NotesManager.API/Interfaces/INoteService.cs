@@ -11,7 +11,7 @@ public interface INoteService
     
     public Task<NoteReadDto> CreateNote(NoteCreateDto note);
     
-    public Task UpdateNote(NoteUpdateDto note);
+    public Task<NoteReadDto> UpdateNote(NoteUpdateDto note, Guid id);
     
     public Task DeleteNote(Guid id);
 }

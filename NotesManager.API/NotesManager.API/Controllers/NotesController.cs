@@ -38,4 +38,12 @@ public class NotesController : ControllerBase
         
         return Ok(noteCreated);
     }
+
+    [HttpPut("{id}")]
+    public async Task<IActionResult> Notes(Guid id, [FromBody] NoteUpdateDto noteUpdateDto)
+    {
+        var noteUpdated = await _noteService.UpdateNote(noteUpdateDto, id);
+        
+        return Ok(noteUpdated);
+    }
 }
