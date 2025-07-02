@@ -8,16 +8,21 @@ const Home = () => {
   const [isNotesVisible, setIsNotesVisible] = useState(false);
 
   const handleSeeAllNotes = async () => {
+    console.log('Fetching notes...');
     await fetchNotes();
+    console.log('Notes fetched, setting isNotesVisible to true. Notes:', notes);
     setIsNotesVisible(true);
   };
 
   const handleCreateNote = async (newNote) => {
     await createNote(newNote);
     if (isNotesVisible) {
+      console.log('Refreshing notes after creation. Notes:', notes);
       await fetchNotes(); // Refresh notes if visible
     }
   };
+
+  console.log('Rendering Home, isNotesVisible:', isNotesVisible, 'Notes:', notes);
 
   return (
     <div className="min-h-screen bg-gray-100">
@@ -34,19 +39,20 @@ const Home = () => {
         {isNotesVisible && (
           <>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {notes.map(note => (
-                <NoteCard 
-                  key={note.id} 
-                  note={note} 
-                  onView={handleView} 
-                  onUpdate={handleUpdate} 
-                  onDelete={handleDelete} 
-                />
-              ))}
+              {notes.length > 0 ? (
+                notes.map(note => (
+                  <NoteCard 
+                    key={note.noteId} 
+                    note={note} 
+                    onView={handleView} 
+                    onUpdate={handleUpdate} 
+                    onDelete={handleDelete} 
+                  />
+                ))
+              ) : (
+                <p className="text-gray-500 text-center mt-6">No notes available.</p>
+              )}
             </div>
-            {notes.length === 0 && (
-              <p className="text-gray-500 text-center mt-6">No notes available.</p>
-            )}
           </>
         )}
         <CreateNoteModal

@@ -1,5 +1,5 @@
 import React, { createContext, useState } from 'react';
-import { fetchNotes as fetchNotesAPI, updateNote, deleteNote, createNote as createNoteAPI } from '../utils/api';
+import { fetchNotes as fetchNotesAPI, updateNote, deleteNote, createNote as createNoteAPI, fetchNoteById as fetchNoteByIdAPI } from '../utils/api';
 
 export const NotesContext = createContext();
 
@@ -10,18 +10,38 @@ export const NotesProvider = ({ children }) => {
   const fetchNotes = async () => {
     try {
       const fetchedNotes = await fetchNotesAPI();
-      setNotes(fetchedNotes);
+      // Filter out notes with undefined or null IDs
+      const validNotes = fetchedNotes.filter(note => note.noteId != null);
+      if (fetchedNotes.length !== validNotes.length) {
+        console.warn('Filtered out invalid notes:', fetchedNotes.filter(note => note.noteId == null));
+      }
+      setNotes(validNotes);
     } catch (error) {
       console.error('Error fetching notes:', error);
+    }
+  };
+
+  const fetchNoteById = async (id) => {
+    try {
+      const note = await fetchNoteByIdAPI(id);
+      return note;
+    } catch (error) {
+      console.error('Error fetching note by ID:', error);
+      throw error;
     }
   };
 
   const createNote = async (newNote) => {
     try {
       const createdNote = await createNoteAPI(newNote);
+      if (!createdNote.noteId) {
+        console.error('Created note has invalid ID:', createdNote);
+        throw new Error('Invalid note ID from API');
+      }
       setNotes([...notes, createdNote]);
     } catch (error) {
       console.error('Error creating note:', error);
+      throw error;
     }
   };
 
@@ -37,7 +57,7 @@ export const NotesProvider = ({ children }) => {
   const handleDelete = async (id) => {
     try {
       await deleteNote(id);
-      setNotes(notes.filter(note => note.id !== id));
+      setNotes(notes.filter(note => note.noteId !== id));
     } catch (error) {
       console.error('Error deleting note:', error);
     }
@@ -48,6 +68,7 @@ export const NotesProvider = ({ children }) => {
       value={{
         notes,
         fetchNotes,
+        fetchNoteById,
         createNote,
         handleView,
         handleUpdate,
