@@ -58,8 +58,11 @@ public class NoteService : INoteService
         return _mapper.Map<NoteReadDto>(noteEntityToUpdate);
     }
 
-    public Task DeleteNote(Guid id)
+    public async Task DeleteNote(Guid id)
     {
-        throw new NotImplementedException();
+        var noteToDelete = await _dbContext.Notes.FindAsync(id);
+        
+        _dbContext.Notes.Remove(noteToDelete);
+        await _dbContext.SaveChangesAsync();
     }
 }
