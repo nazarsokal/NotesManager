@@ -1,30 +1,40 @@
 import React, { createContext, useState } from 'react';
+import { fetchNotes as fetchNotesAPI, updateNote, deleteNote } from '../utils/api';
 
 export const NotesContext = createContext();
 
-const sampleNotes = [
-  { id: 1, title: 'Meeting Notes', content: 'Discuss project timeline and deliverables', date: '2025-07-01' },
-  { id: 2, title: 'Grocery List', content: 'Milk, eggs, bread, vegetables', date: '2025-07-02' },
-];
-
 export const NotesProvider = ({ children }) => {
-  const [notes, setNotes] = useState(sampleNotes);
+  const [notes, setNotes] = useState([]);
+
+  const fetchNotes = async () => {
+    try {
+      const fetchedNotes = await fetchNotesAPI();
+      setNotes(fetchedNotes);
+    } catch (error) {
+      console.error('Error fetching notes:', error);
+    }
+  };
 
   const handleView = (id) => {
-    window.location.href = `/note/${id}`; // Use react-router-dom in practice
+    // Navigation handled by react-router-dom in NoteCard
   };
 
   const handleUpdate = (id) => {
     alert(`Update note with ID: ${id}`);
-    // Implement update logic
+    // Add update logic (e.g., call updateNote API)
   };
 
-  const handleDelete = (id) => {
-    setNotes(notes.filter(note => note.id !== id));
+  const handleDelete = async (id) => {
+    try {
+      await deleteNote(id);
+      setNotes(notes.filter(note => note.id !== id));
+    } catch (error) {
+      console.error('Error deleting note:', error);
+    }
   };
 
   return (
-    <NotesContext.Provider value={{ notes, handleView, handleUpdate, handleDelete }}>
+    <NotesContext.Provider value={{ notes, fetchNotes, handleView, handleUpdate, handleDelete }}>
       {children}
     </NotesContext.Provider>
   );

@@ -4,7 +4,6 @@ const NoteCard = ({ note, onView, onUpdate, onDelete }) => {
   return (
     <div className="bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition">
       <h3 className="text-lg font-semibold text-green-700">{note.title}</h3>
-      <p className="text-gray-600">{note.content.substring(0, 50)}...</p>
       <p className="text-sm text-gray-500">{note.date}</p>
       <div className="mt-4 flex space-x-2">
         <button 
