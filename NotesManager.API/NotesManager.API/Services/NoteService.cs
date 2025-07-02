@@ -18,21 +18,21 @@ public class NoteService : INoteService
         _mapper = mapper;
     }
     
-    public async Task<List<NoteListDto>> GetAllNotes()
+    public async Task<List<NoteListDto>?> GetAllNotes()
     {
         var notes = await _dbContext.Notes.ToListAsync();
         
         return _mapper.Map<List<NoteListDto>>(notes);
     }
 
-    public async Task<NoteReadDto> GetNoteById(Guid id)
+    public async Task<NoteReadDto?> GetNoteById(Guid id)
     {
         var note = await _dbContext.Notes.FindAsync(id);
         
         return _mapper.Map<NoteReadDto>(note);
     }
 
-    public async Task<NoteReadDto> CreateNote(NoteCreateDto note)
+    public async Task<NoteReadDto?> CreateNote(NoteCreateDto note)
     {
         Note noteEntity = _mapper.Map<Note>(note);
         
@@ -42,7 +42,7 @@ public class NoteService : INoteService
         return _mapper.Map<NoteReadDto>(noteEntity);
     }
 
-    public async Task<NoteReadDto> UpdateNote(NoteUpdateDto note, Guid id)
+    public async Task<NoteReadDto?> UpdateNote(NoteUpdateDto note, Guid id)
     {
         Note? noteEntityToUpdate = await _dbContext.Notes.FindAsync(id);
         
@@ -58,11 +58,16 @@ public class NoteService : INoteService
         return _mapper.Map<NoteReadDto>(noteEntityToUpdate);
     }
 
-    public async Task DeleteNote(Guid id)
+    public async Task<bool> DeleteNote(Guid id)
     {
         var noteToDelete = await _dbContext.Notes.FindAsync(id);
         
+        if(noteToDelete == null)
+            return false;
+        
         _dbContext.Notes.Remove(noteToDelete);
         await _dbContext.SaveChangesAsync();
+        
+        return true;
     }
 }
