@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using NotesManager.API.DTOs;
 using NotesManager.API.Infrastructure;
 using NotesManager.API.Interfaces;
+using NotesManager.API.Models;
 
 namespace NotesManager.API.Services;
 
@@ -31,9 +32,14 @@ public class NoteService : INoteService
         return _mapper.Map<NoteReadDto>(note);
     }
 
-    public Task CreateNote(NoteCreateDto note)
+    public async Task<NoteReadDto> CreateNote(NoteCreateDto note)
     {
-        throw new NotImplementedException();
+        Note noteEntity = _mapper.Map<Note>(note);
+        
+        _dbContext.Notes.Add(noteEntity);
+        await _dbContext.SaveChangesAsync();
+        
+        return _mapper.Map<NoteReadDto>(noteEntity);
     }
 
     public Task UpdateNote(NoteUpdateDto note)

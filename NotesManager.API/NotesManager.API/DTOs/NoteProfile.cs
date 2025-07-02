@@ -7,7 +7,10 @@ public class NoteProfile : Profile
 {
     public NoteProfile()
     {
-        CreateMap<NoteCreateDto, Note>();
+        CreateMap<NoteCreateDto, Note>()
+            .ForMember(dest => dest.DateCreated, 
+                opt => opt.MapFrom(src => DateTime.Now));
+        
         CreateMap<NoteListDto, Note>();
         CreateMap<NoteReadDto, Note>();
         CreateMap<NoteUpdateDto, Note>();

@@ -9,7 +9,7 @@ public interface INoteService
     
     public Task<NoteReadDto> GetNoteById(Guid id);
     
-    public Task CreateNote(NoteCreateDto note);
+    public Task<NoteReadDto> CreateNote(NoteCreateDto note);
     
     public Task UpdateNote(NoteUpdateDto note);
     

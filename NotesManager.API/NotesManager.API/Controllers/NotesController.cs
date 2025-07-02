@@ -30,4 +30,12 @@ public class NotesController : ControllerBase
         
         return Ok(noteReadDto);
     }
+
+    [HttpPost]
+    public async Task<IActionResult> Notes([FromBody] NoteCreateDto noteCreateDto)
+    {
+        var noteCreated = await _noteService.CreateNote(noteCreateDto);
+        
+        return Ok(noteCreated);
+    }
 }
