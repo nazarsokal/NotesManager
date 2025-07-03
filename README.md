@@ -142,8 +142,5 @@ dotnet run
 - **Frontend:** React + Cypress
 - **Backend:** ASP.NET Core Web API
 - **Database:** SQL Server running via Docker
-- **API Docs:** Swagger at `/swagger`
 
 ---
-
-Let me know if you want to include Docker Compose, deployment steps, or authentication next!
