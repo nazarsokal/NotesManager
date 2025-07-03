@@ -1,26 +1,24 @@
 # Notes Manager Client
 
-![Notes Manager Logo](https://via.placeholder.com/150?text=Notes+Manager) <!-- Placeholder for a logo -->
-
 ## Overview
 
-Welcome to the Notes Manager React client! This application allows you to manage notes. Enjoy multi-language support (English, Spanish, Ukrainian) and core features like creating, viewing, updating, and deleting notes. The project includes an end-to-end (e2e) test suite powered by Cypress.
+Welcome to the Notes Manager full-stack project! This includes a React client and ASP.NET Core Web API backend. It supports multi-language note management (English, Spanish, Ukrainian), including features like creating, viewing, updating, and deleting notes. The project also includes end-to-end tests using Cypress.
 
 ---
 
 ## Prerequisites
 
-- **Node.js and npm**: Must be installed on your system.
+- **Node.js and npm** (for client)
+- **.NET 7 SDK or newer** (for API)
+- **Docker** (for running SQL Server database)
+- **EF Core CLI** (optional, for DB migrations)
 
 ---
 
-## Install
-
-Follow these steps to set up the project locally.
+## 📦 Frontend Setup (React)
 
 ### 1. Clone the Repository
 
-Clone the project to your local machine:
 ```bash
 git clone https://github.com/nazarsokal/NotesManager.git
 cd notes-manager.ui
@@ -28,51 +26,124 @@ cd notes-manager.ui
 
 ### 2. Install Dependencies
 
-Install the required packages:
 ```bash
 npm install --legacy-peer-deps
 ```
 
-> The `--legacy-peer-deps` flag resolves potential dependency conflicts. This may take a few minutes.
+> The `--legacy-peer-deps` flag resolves potential dependency conflicts.
 
-### 3. Install Cypress Binary
+### 3. Install Cypress (E2E)
 
-Install Cypress for running end-to-end tests:
 ```bash
 npx cypress install
 ```
 
----
+### 4. Run React App
 
-## Running the Application
-
-Start the React application:
 ```bash
 npm start
 ```
 
-The app will be available at [http://localhost:3000](http://localhost:3000). Open this URL in your browser to start managing notes.
+Visit: [http://localhost:3000](http://localhost:3000)
 
 ---
 
-## Running the e2e Tests
+## 🧪 Running the e2e Tests
 
 ### 1. Ensure App is Running
 
 Keep the React app active at `http://localhost:3000`.
 
-### 2. Open Cypress Test Runner
+### 2. Open Cypress
 
-Launch the Cypress GUI:
 ```bash
 npx cypress open
 ```
 
-Select **"E2E Testing"** and click `cypress/e2e/notesManager.cy.js` to run the test.
+Choose **E2E Testing** → Run `cypress/e2e/notesManager.cy.js`
 
-### 3. Test Execution
+---
 
-- The test automates loading notes and switching to Ukrainian.
-- ✅ A green checkmark indicates success.
-- ❌ A red "X" indicates a failure.
-- Use the "Debug" button in the Cypress UI to inspect issues if needed.
+## ⚙️ Backend Setup (ASP.NET Core API)
+
+### 1. Unzip and Open the API Project
+
+Unzip and navigate to the API folder:
+```bash
+cd NotesManager.API
+```
+
+### 2. Restore Dependencies
+
+```bash
+dotnet restore
+```
+
+---
+
+## 🐳 SQL Server Setup with Docker
+
+If you don't have SQL Server installed locally, you can run it in Docker:
+
+```bash
+docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=Very123StrongPass" -p 1433:1433 --name test-asigment-sqlserver -d mcr.microsoft.com/mssql/server:2022-latest
+```
+
+- Username: `sa`  
+- Password: `Very123StrongPass`  
+- Port: `1433`
+
+You can verify the container is running:
+
+```bash
+docker ps
+```
+
+---
+
+## 🛠️ Configure Connection String
+
+In `appsettings.json` of the API project, update your connection string like this:
+
+```json
+"ConnectionStrings": {
+  "DefaultConnection": "Server=localhost,1433;Database=NotesManagerDb;User Id=sa;Password=Very123StrongPass;TrustServerCertificate=True;"
+}
+```
+---
+
+## 🗃️ Apply EF Core Migrations
+
+To create the database:
+
+```bash
+dotnet ef database update
+```
+
+To generate a new migration (if needed):
+
+```bash
+dotnet ef migrations add InitialCreate
+```
+
+---
+
+## ▶️ Run the API
+
+Start the API:
+
+```bash
+dotnet run
+```
+---
+
+## ✅ Summary
+
+- **Frontend:** React + Cypress
+- **Backend:** ASP.NET Core Web API
+- **Database:** SQL Server running via Docker
+- **API Docs:** Swagger at `/swagger`
+
+---
+
+Let me know if you want to include Docker Compose, deployment steps, or authentication next!
