@@ -1,10 +1,10 @@
 import React, { useContext, useState } from 'react';
 import { NotesContext } from '../context/NotesContext';
 import NoteCard from '../components/NoteCard';
-import CreateNoteModal from '../components/CreateNoteModal';
+import NoteModal from '../components/NoteModal';
 
 const Home = () => {
-  const { notes, fetchNotes, handleView, handleUpdate, handleDelete, createNote, isModalOpen, setIsModalOpen } = useContext(NotesContext);
+  const { notes, fetchNotes, handleView, handleUpdate, handleDelete, createNote, isModalOpen, setIsModalOpen, updateModalOpen, setUpdateModalOpen } = useContext(NotesContext);
   const [isNotesVisible, setIsNotesVisible] = useState(false);
 
   const handleSeeAllNotes = async () => {
@@ -42,7 +42,7 @@ const Home = () => {
               {notes.length > 0 ? (
                 notes.map(note => (
                   <NoteCard 
-                    key={note.noteId} 
+                    key={note.id} 
                     note={note} 
                     onView={handleView} 
                     onUpdate={handleUpdate} 
@@ -55,10 +55,15 @@ const Home = () => {
             </div>
           </>
         )}
-        <CreateNoteModal
+        <NoteModal
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}
           onCreate={handleCreateNote}
+        />
+        <NoteModal
+          isOpen={updateModalOpen}
+          onClose={() => setUpdateModalOpen(false)} // Fixed to use setUpdateModalOpen
+          isUpdate={true}
         />
       </div>
     </div>
