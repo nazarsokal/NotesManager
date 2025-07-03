@@ -1,0 +1,30 @@
+{
+  "navbar": {
+    "createNote": "Створити нотатку"
+  },
+  "home": {
+    "title": "Ваші нотатки",
+    "seeAllNotes": "Переглянути всі нотатки",
+    "noNotes": "Нотатки відсутні."
+  },
+  "noteCard": {
+    "view": "Переглянути",
+    "update": "Оновити",
+    "delete": "Видалити"
+  },
+  "noteModal": {
+    "createTitle": "Створити нотатку",
+    "updateTitle": "Оновити нотатку",
+    "titleLabel": "Заголовок",
+    "contentLabel": "Зміст",
+    "dateLabel": "Дата",
+    "cancel": "Скасувати",
+    "create": "Створити",
+    "update": "Оновити"
+  },
+  "language": {
+    "switchToEnglish": "Переключитися на англійську",
+    "switchToSpanish": "Переключитися на іспанську",
+    "switchToUkrainian": "Переключитися на українську"
+  }
+}

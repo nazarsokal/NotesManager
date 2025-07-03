@@ -1,0 +1,30 @@
+{
+  "navbar": {
+    "createNote": "Crear Nota"
+  },
+  "home": {
+    "title": "Tus Notas",
+    "seeAllNotes": "Ver Todas las Notas",
+    "noNotes": "No hay notas disponibles."
+  },
+  "noteCard": {
+    "view": "Ver",
+    "update": "Actualizar",
+    "delete": "Eliminar"
+  },
+  "noteModal": {
+    "createTitle": "Crear Nota",
+    "updateTitle": "Actualizar Nota",
+    "titleLabel": "Título",
+    "contentLabel": "Contenido",
+    "dateLabel": "Fecha",
+    "cancel": "Cancelar",
+    "create": "Crear",
+    "update": "Actualizar"
+  },
+  "language": {
+    "switchToEnglish": "Cambiar a Inglés",
+    "switchToSpanish": "Cambiar a Español",
+    "switchToUkrainian": "Cambiar a Ucranio"
+  }
+}

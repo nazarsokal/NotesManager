@@ -1,10 +1,12 @@
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { NotesContext } from '../context/NotesContext';
+import { useTranslation } from 'react-i18next';
 
 const NoteCard = ({ note, onUpdate, onDelete }) => {
   const { fetchNoteById, openUpdateModal } = useContext(NotesContext);
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const handleView = async () => {
     if (!note.id) {
@@ -39,21 +41,21 @@ const NoteCard = ({ note, onUpdate, onDelete }) => {
           onClick={handleView}
           className="bg-green-500 text-white px-3 py-1 rounded-md hover:bg-green-600 transition"
         >
-          View
+          {t('noteCard.view')}
         </button>
         <button 
           onClick={handleUpdateClick}
           className="bg-blue-500 text-white px-3 py-1 rounded-md hover:bg-blue-600 transition"
           disabled={!note.id}
         >
-          Update
+          {t('noteCard.update')}
         </button>
         <button 
           onClick={() => onDelete(note.id)}
           className="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600 transition"
           disabled={!note.id}
         >
-          Delete
+          {t('noteCard.delete')}
         </button>
       </div>
     </div>
