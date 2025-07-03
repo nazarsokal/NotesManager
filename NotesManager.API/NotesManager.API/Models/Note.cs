@@ -6,7 +6,7 @@ namespace NotesManager.API.Models;
 public class Note
 {
     [Key]
-    public Guid NoteId { get; set; }
+    public Guid Id { get; set; }
     
     [Column(TypeName = "nvarchar(100)")]
     public required string Title { get; set; }
