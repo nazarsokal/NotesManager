@@ -14,41 +14,65 @@ Welcome to the Notes Manager React client! This application allows you to manage
 
 ---
 
-## Getting Started
+## Install
 
-### Installation
+Follow these steps to set up the project locally.
 
-1. **Clone the Repository**  
-   Clone the project to your local machine:
-   ```bash
-   git clone https://github.com/nazarsokal/NotesManager.git
-   cd notes-manager.ui
-   
-2. **Install Dependencies**
-  Install the required packages:
-  ```bash
-  npm install --legacy-peer-deps
-  The --legacy-peer-deps flag resolves potential dependency conflicts. This may take a few minutes.
-  Install Cypress Binary
-  ```bash
-  npx cypress install
-3. **Running the Application**
-  Start the React application:
-  ```bash
-  npm start
+### 1. Clone the Repository
 
-  The app will be available at http://localhost:3000. Open this URL in your browser to start managing notes.
+Clone the project to your local machine:
+```bash
+git clone https://github.com/nazarsokal/NotesManager.git
+cd notes-manager.ui
+```
 
-4. **Running the e2e Tests**
-  Ensure App is Running
-  Keep the React app active at http://localhost:3000.
-  Open Cypress Test Runner
-  Launch the Cypress GUI:
-  ```bash
-  npx cypress open
-  Select "E2E Testing" and click cypress/e2e/notesManager.cy.js to run the test.
+### 2. Install Dependencies
 
-  Test Execution
-  The test automates loading notes, switching to Ukrainian.
-  A green checkmark indicates success; a red "X" indicates a failure.
-  Use the "Debug" button in the Cypress UI to inspect issues if needed.
+Install the required packages:
+```bash
+npm install --legacy-peer-deps
+```
+
+> The `--legacy-peer-deps` flag resolves potential dependency conflicts. This may take a few minutes.
+
+### 3. Install Cypress Binary
+
+Install Cypress for running end-to-end tests:
+```bash
+npx cypress install
+```
+
+---
+
+## Running the Application
+
+Start the React application:
+```bash
+npm start
+```
+
+The app will be available at [http://localhost:3000](http://localhost:3000). Open this URL in your browser to start managing notes.
+
+---
+
+## Running the e2e Tests
+
+### 1. Ensure App is Running
+
+Keep the React app active at `http://localhost:3000`.
+
+### 2. Open Cypress Test Runner
+
+Launch the Cypress GUI:
+```bash
+npx cypress open
+```
+
+Select **"E2E Testing"** and click `cypress/e2e/notesManager.cy.js` to run the test.
+
+### 3. Test Execution
+
+- The test automates loading notes and switching to Ukrainian.
+- ✅ A green checkmark indicates success.
+- ❌ A red "X" indicates a failure.
+- Use the "Debug" button in the Cypress UI to inspect issues if needed.
