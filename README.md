@@ -32,7 +32,7 @@ dotnet restore
 
 ## SQL Server Setup with Docker
 
-If you don't have SQL Server installed locally, you can run it in Docker:
+To run db in Docker:
 
 ```bash
 docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=Very123StrongPass" -p 1433:1433 --name test-asigment-sqlserver -d mcr.microsoft.com/mssql/server:2022-latest
@@ -41,12 +41,6 @@ docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=Very123StrongPass" -p 1433:1433 --
 - Username: `sa`  
 - Password: `Very123StrongPass`  
 - Port: `1433`
-
-You can verify the container is running:
-
-```bash
-docker ps
-```
 
 ---
 
