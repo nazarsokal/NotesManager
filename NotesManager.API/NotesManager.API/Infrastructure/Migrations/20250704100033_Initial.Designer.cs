@@ -12,8 +12,8 @@ using NotesManager.API.Infrastructure;
 namespace NotesManager.API.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250701201421_ColumnTypesChanged")]
-    partial class ColumnTypesChanged
+    [Migration("20250704100033_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -49,9 +49,9 @@ namespace NotesManager.API.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            NoteId = new Guid("ac799f75-e175-48bb-8767-dfe5dd7ef00e"),
+                            NoteId = new Guid("2bfab67a-aba0-47b2-983e-5207debb4733"),
                             Content = "Hello World!",
-                            DateCreated = new DateTime(2025, 7, 1, 23, 14, 20, 62, DateTimeKind.Local).AddTicks(5450),
+                            DateCreated = new DateTime(2025, 7, 4, 13, 0, 32, 893, DateTimeKind.Local).AddTicks(8380),
                             Title = "Welcome Note"
                         });
                 });

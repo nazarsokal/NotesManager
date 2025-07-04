@@ -46,9 +46,9 @@ namespace NotesManager.API.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            NoteId = new Guid("43d34099-0d4e-4a0d-8eb5-82609f4b2dc6"),
+                            NoteId = new Guid("2bfab67a-aba0-47b2-983e-5207debb4733"),
                             Content = "Hello World!",
-                            DateCreated = new DateTime(2025, 7, 2, 1, 31, 0, 800, DateTimeKind.Local).AddTicks(5660),
+                            DateCreated = new DateTime(2025, 7, 4, 13, 0, 32, 893, DateTimeKind.Local).AddTicks(8380),
                             Title = "Welcome Note"
                         });
                 });

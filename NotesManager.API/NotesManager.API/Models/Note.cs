@@ -1,12 +1,14 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace NotesManager.API.Models;
 
 public class Note
 {
     [Key]
-    public Guid Id { get; set; }
+    [JsonPropertyName("id")]
+    public Guid NoteId { get; set; }
     
     [Column(TypeName = "nvarchar(100)")]
     public required string Title { get; set; }
