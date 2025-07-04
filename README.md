@@ -1,4 +1,4 @@
-# Notes Manager Client
+# Notes Manager
 
 ## Overview
 
