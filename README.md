@@ -50,7 +50,7 @@ In `appsettings.json` of the API project, update your connection string like thi
 
 ```json
 "ConnectionStrings": {
-  "DefaultConnection": "Server=localhost,1433;Database=NotesManagerDb;User Id=sa;Password=Very123StrongPass;TrustServerCertificate=True;"
+  "Default" : "Server=localhost,1433;Database=master;User Id=SA;Password=Very123StrongPass;TrustServerCertificate=True;"
 }
 ```
 ---
