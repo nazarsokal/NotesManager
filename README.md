@@ -63,16 +63,15 @@ In `appsettings.json` of the API project, update your connection string like thi
 
 ## Apply EF Core Migrations
 
-To create the database:
+To generate a new migration:
 
 ```bash
-dotnet ef database update
+dotnet ef migrations add InitialCreate --output-dir Infrastructure/Migrations
 ```
 
-To generate a new migration (if needed):
-
+To create the database:
 ```bash
-dotnet ef migrations add InitialCreate
+dotnet ef database update
 ```
 
 ---
