@@ -14,16 +14,85 @@ Welcome to the Notes Manager full-stack project! This includes a React client an
 - **EF Core CLI** (optional, for DB migrations)
 
 ---
-
-## 📦 Frontend Setup (React)
+## Backend Setup (ASP.NET Core API)
 
 ### 1. Clone the Repository
 
 ```bash
 git clone https://github.com/nazarsokal/NotesManager.git
-cd notes-manager.ui
+cd NotesManager.API
+```
+### 2. Restore Dependencies
+
+```bash
+dotnet restore
 ```
 
+---
+
+## SQL Server Setup with Docker
+
+If you don't have SQL Server installed locally, you can run it in Docker:
+
+```bash
+docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=Very123StrongPass" -p 1433:1433 --name test-asigment-sqlserver -d mcr.microsoft.com/mssql/server:2022-latest
+```
+
+- Username: `sa`  
+- Password: `Very123StrongPass`  
+- Port: `1433`
+
+You can verify the container is running:
+
+```bash
+docker ps
+```
+
+---
+
+## Configure Connection String
+
+In `appsettings.json` of the API project, update your connection string like this:
+
+```json
+"ConnectionStrings": {
+  "DefaultConnection": "Server=localhost,1433;Database=NotesManagerDb;User Id=sa;Password=Very123StrongPass;TrustServerCertificate=True;"
+}
+```
+---
+
+## Apply EF Core Migrations
+
+To create the database:
+
+```bash
+dotnet ef database update
+```
+
+To generate a new migration (if needed):
+
+```bash
+dotnet ef migrations add InitialCreate
+```
+
+---
+
+## Run the API
+
+Start the API:
+
+```bash
+dotnet run
+```
+---
+## Frontend Setup (React)
+
+### 1. Unzip and Open the API Project
+
+Unzip and navigate to the API folder:
+```bash
+cd notes-manager.ui
+```
 ### 2. Install Dependencies
 
 ```bash
@@ -48,7 +117,7 @@ Visit: [http://localhost:3000](http://localhost:3000)
 
 ---
 
-## 🧪 Running the e2e Tests
+## Running the e2e Tests
 
 ### 1. Ensure App is Running
 
@@ -64,80 +133,9 @@ Choose **E2E Testing** → Run `cypress/e2e/notesManager.cy.js`
 
 ---
 
-## ⚙️ Backend Setup (ASP.NET Core API)
 
-### 1. Unzip and Open the API Project
 
-Unzip and navigate to the API folder:
-```bash
-cd NotesManager.API
-```
-
-### 2. Restore Dependencies
-
-```bash
-dotnet restore
-```
-
----
-
-## 🐳 SQL Server Setup with Docker
-
-If you don't have SQL Server installed locally, you can run it in Docker:
-
-```bash
-docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=Very123StrongPass" -p 1433:1433 --name test-asigment-sqlserver -d mcr.microsoft.com/mssql/server:2022-latest
-```
-
-- Username: `sa`  
-- Password: `Very123StrongPass`  
-- Port: `1433`
-
-You can verify the container is running:
-
-```bash
-docker ps
-```
-
----
-
-## 🛠️ Configure Connection String
-
-In `appsettings.json` of the API project, update your connection string like this:
-
-```json
-"ConnectionStrings": {
-  "DefaultConnection": "Server=localhost,1433;Database=NotesManagerDb;User Id=sa;Password=Very123StrongPass;TrustServerCertificate=True;"
-}
-```
----
-
-## 🗃️ Apply EF Core Migrations
-
-To create the database:
-
-```bash
-dotnet ef database update
-```
-
-To generate a new migration (if needed):
-
-```bash
-dotnet ef migrations add InitialCreate
-```
-
----
-
-## ▶️ Run the API
-
-Start the API:
-
-```bash
-dotnet run
-```
----
-
-## ✅ Summary
+## Summary
 
 - **Frontend:** React + Cypress
 - **Backend:** ASP.NET Core Web API
